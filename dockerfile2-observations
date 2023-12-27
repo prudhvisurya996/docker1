@@ -1,1 +1,3 @@
-
+FROM tomcat:9.0-jdk11-openjdk-slim  this version didnt work with the project
+changed version in Docker3 file to tomcat:8.0-alpine
+check Dockerfile3 in this repo
