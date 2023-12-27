@@ -1,0 +1,24 @@
+ using maven3 build tool
+FROM maven:3.8.4-openjdk-11-slim AS build
+USER root
+# Set the working directory in the container
+WORKDIR /app
+RUN apt update -y
+RUN apt install git -y
+# Clone the Git repository
+RUN git clone  https://github.com/Venna12/dockerjenkin.git .
+
+# Run Maven package
+RUN mvn package
+
+# Use the official Tomcat base image
+FROM tomcat:8.0-alpine
+
+# Copy the WAR file from the Maven build stage to the Tomcat webapps directory
+COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/
+
+# Expose the default Tomcat port
+EXPOSE 8080
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]
