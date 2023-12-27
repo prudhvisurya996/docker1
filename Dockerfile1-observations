@@ -1,3 +1,7 @@
 No war file present in the source location
 
 Copy command failed 
+
+COPY ./java-tomcat-maven-example.war /usr/local/tomcat/webapps/
+
+no such file are directory
